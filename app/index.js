@@ -43,6 +43,23 @@ app.post('/calc', function(req, res){
   res.render('calc', {x:x, y:y, op:req.body.op, ans:ans});
 });
 
+app.get('/boxes', function(req, res){
+  res.render('box1');
+});
+
+app.post('/boxes', function(req, res){
+  var colors = req.body.colors.split(',');
+  var widths = req.body.width.split('-');
+  var heights = req.body.height.split('-');
+  var count = req.body.count * 1;
+
+  colors = colors.map(function(c){return c.trim();});
+  widths = widths.map(function(n){return n * 1;});
+  heights = heights.map(function(n){return n * 1;});
+
+  res.render('box2', {colors:colors, widths:widths, heights:heights, count:count});
+});
+
 var port = process.env.PORT;
 
 app.listen(port, function(){
